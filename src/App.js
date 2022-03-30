@@ -1,23 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useReducer } from 'react';
+import useAlertsReducer from './useAlertsReducer';
+import AlertManager from './AlertManager';
+import AlertExample from './AlertExample';
+import { Stack } from '@mui/material';
+
 
 function App() {
+  const [state, dispatch] = useReducer(useAlertsReducer, { activeAlerts: [] })
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="appContainer">
+      <div>
+        <Stack gap={2}/>
+        <AlertManager alerts={state.activeAlerts} dispatch={dispatch} />
+        <AlertExample dispatch={dispatch}/>
+      </div>
     </div>
   );
 }
